@@ -82,7 +82,8 @@ class WebView extends React.Component<WebViewSharedProps, State> {
     lastErrorEvent: null,
   };
 
-  webViewRef = React.createRef();
+  //webViewRef = React.createRef();
+  RCT_WEBVIEW_REF = 'webview';
 
   render() {
     let otherView = null;
@@ -141,7 +142,7 @@ class WebView extends React.Component<WebViewSharedProps, State> {
 
     const webView = (
       <NativeWebView
-        ref={this.webViewRef}
+        ref={this.RCT_WEBVIEW_REF}
         key="webViewKey"
         style={webViewStyles}
         source={resolveAssetSource(source)}
@@ -256,7 +257,8 @@ class WebView extends React.Component<WebViewSharedProps, State> {
   };
 
   getWebViewHandle = () => {
-    return ReactNative.findNodeHandle(this.webViewRef.current);
+    return ReactNative.findNodeHandle(this.refs[RCT_WEBVIEW_REF]);
+    //return ReactNative.findNodeHandle(this.webViewRef.current);
   };
 
   onLoadingStart = (event: WebViewNavigationEvent) => {
